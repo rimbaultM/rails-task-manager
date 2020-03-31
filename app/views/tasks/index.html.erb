@@ -1,8 +1,19 @@
 <h1>Liste des taches</h1>
  <ul>
    <% @tasks.each do |task| %>
-   <li> <%= task.completed %> <%= link_to task.title, task_path(task) %> </li>
+      <% if task.completed then %>
+        <li> ☑️ <%= link_to task.title, task_path(task) %>
+          <%= link_to '🗑️', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      <% else %>
+        <li> ❌ <%= link_to task.title, task_path(task) %>
+          <%= link_to '🗑️', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      <% end %>
    <% end %>
  </ul>
 
 <%= link_to 'create', new_task_path %>
+
+
+
